@@ -79,4 +79,36 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
+    public void selectCustomers(){
+        String sql = "SELECT username, name, password, trips, balance FROM customers";
+        
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            while (rs.next()) {
+                System.out.println(rs.getString("username") +  "\t" + 
+                                   rs.getString("name") + "\t" +
+                                   rs.getString("password")+ "\t" + rs.getInt("trips")+ "\t" + rs.getDouble("balance"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void selectEmployees(){
+        String sql = "SELECT empID, name, salary FROM employees";
+        
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+           
+            while (rs.next()) {
+                System.out.println(rs.getString("empID") +  "\t" + 
+                                   rs.getString("name") + "\t" +
+                                   rs.getDouble("capacity"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
