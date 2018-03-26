@@ -14,7 +14,7 @@ import java.sql.*;
 public class Database {
     
     private Connection connect(){
-        String ur1="jdbc:sqlite:D:/Database/BusStation.db";
+        String ur1="jdbc:sqlite:C:/Users/user/AppData/Local/BusStation.db";
         Connection conn=null;
         try{
             conn=DriverManager.getConnection(ur1);
