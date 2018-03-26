@@ -15,9 +15,4 @@ public class Manager extends Employee{
     {
         this.name = name;
     }
-    
-    public void createnewTrip()
-    {
-        
-    }
 }

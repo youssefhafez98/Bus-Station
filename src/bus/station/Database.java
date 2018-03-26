@@ -151,4 +151,33 @@ public class Database {
         }
     }
     
+    public int searchEmployees(String username, String password, int type)
+    {
+        String sql = "SELECT username, password FROM employees";
+        
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()) {
+                if(type == 1)
+                {                 if(rs.getString("username").equals(username) && rs.getString("password").equals(password))
+                                   {
+                                       return 1;
+                                   }
+                }
+                else if(type == 2)
+                {                 if(rs.getString("username").equals(username) && rs.getString("password").equals(password))
+                                   {
+                                       return 2;
+                                   }                    
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return -1;
+    }
+    
 }

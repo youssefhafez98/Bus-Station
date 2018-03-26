@@ -21,12 +21,14 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     int flag=0;
+    int type;
     
     public Login() {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("logo.jpg")).getImage());
         this.getContentPane().setBackground(new Color(192,0,0));
         jLabel1.requestFocus();
+        jRadioButton1.isSelected();
     }
 
     /**
@@ -46,6 +48,9 @@ public class Login extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -112,12 +117,49 @@ public class Login extends javax.swing.JFrame {
         jPasswordField1.setBounds(54, 240, 300, 40);
 
         jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
-        jButton1.setBounds(54, 293, 135, 38);
+        jButton1.setBounds(54, 310, 135, 38);
 
         jButton2.setText("Sign up");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
-        jButton2.setBounds(219, 293, 135, 38);
+        jButton2.setBounds(219, 310, 135, 38);
+
+        jRadioButton1.setText("Customer");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jRadioButton1);
+        jRadioButton1.setBounds(54, 284, 100, 23);
+
+        jRadioButton2.setText("Manager");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jRadioButton2);
+        jRadioButton2.setBounds(157, 284, 100, 23);
+
+        jRadioButton3.setText("Driver");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jRadioButton3);
+        jRadioButton3.setBounds(260, 284, 93, 23);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Welcome.png"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -165,42 +207,67 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int test;
+        Database d = new Database();
+        ManagerUI mui = new ManagerUI(); 
+        DriverUI dui = new DriverUI(); 
+        
+        String username;
+        String password;
+        
+        username=jTextField3.getText();
+        password=jPasswordField1.getText();
+        
+        if(jRadioButton1.isSelected())
+            type=0;
+        else if(jRadioButton2.isSelected())
+            type=1;
+        else if(jRadioButton3.isSelected())
+            type=2;
+        
+        test=d.searchEmployees(username, password, type);
+        if(test==1)
+        {
+            this.setVisible(false);
+            mui.run();
         }
-        //</editor-fold>
+        else if(test==2)
+        {
+            this.setVisible(false);
+            dui.run();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        jRadioButton2.setSelected(false);
+        jRadioButton1.setSelected(false);
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        jRadioButton3.setSelected(false);
+        jRadioButton1.setSelected(false);
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        jRadioButton2.setSelected(false);
+        jRadioButton3.setSelected(false);
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Signup signup = new Signup();
+        this.setVisible(false);
+        signup.run();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+
+    public void run() {
                 new Login().setVisible(true);
-            }
-        });
     }
 
-
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -209,6 +276,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables

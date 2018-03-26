@@ -16,6 +16,18 @@ public class Customer {
    private int trips;
    private double balance;
    
+   
+   public Customer(String name, String username, String password)
+   {
+       Database d = new Database();
+       this.name=name;
+       this.username=username;
+       this.password=password;
+       this.trips = 0;
+       this.balance=0.0;
+       d.insertCustomer(username,password,name,trips,balance);
+   }
+   
    public static double calculateprice(int multiplier, int tickettype)
    {
        double price=0;

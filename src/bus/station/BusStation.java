@@ -81,6 +81,7 @@ public class BusStation {
     public static void main(String[] args) {
         
         Database d=new Database();
+        Login login = new Login();
         
         createDb("BusStation");
         createTableCustomers();
@@ -88,7 +89,6 @@ public class BusStation {
         createTableTrips();
         createTableEmployees();
         
-        
-        
+        login.run();
     }
 }
