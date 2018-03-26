@@ -79,10 +79,19 @@ public class BusStation {
    }
     
     public static void main(String[] args) {
+        
+        Database d=new Database();
+        
         createDb("BusStation");
         createTableCustomers();
         createTableVehicles();
         createTableTrips();
         createTableEmployees();
+        
+        d.insertCustomer("Username", "password", "name", 2, 2.0);
+        d.insertEmployee("test1", "test2", 3);
+        d.insertTrip("test1", "test1", "test2", "test3", 3);
+        d.insertVehicle("test1", "test2", "test3", 2);
+        
     }
 }

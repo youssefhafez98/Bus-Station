@@ -25,12 +25,12 @@ public class Database {
     }
     
     public void insertCustomer(String username,String password, String name, int trips, double balance){
-        String sq1="INSERT INTO customers(username,password,name,trips) VALUES(?,?,?,?,?)";
+        String sq1="INSERT INTO customers(username,name,password,trips,balance) VALUES(?,?,?,?,?)";
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sq1)) {
             pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            pstmt.setString(3, name);
+            pstmt.setString(2, name);
+            pstmt.setString(3, password);
             pstmt.setInt(4, trips);
             pstmt.setFloat(5, (float) balance);
             pstmt.executeUpdate();
@@ -66,7 +66,7 @@ public class Database {
         }
         
     public void insertTrip(String tripID,String date,String driver, String state, double price ){
-        String sq1="INSERT INTO trips(ID,Name) VALUES(?,?,?,?,?)";
+        String sq1="INSERT INTO trips(tripID,date,driver,state,price) VALUES(?,?,?,?,?)";
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sq1)) {
             pstmt.setString(1, tripID);
@@ -105,10 +105,50 @@ public class Database {
             while (rs.next()) {
                 System.out.println(rs.getString("empID") +  "\t" + 
                                    rs.getString("name") + "\t" +
-                                   rs.getDouble("capacity"));
+                                   rs.getDouble("salary"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+    public void selecttrips(){
+        String sql = "SELECT tripID, date, driver, state, price FROM createTableTrips";
+
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()) {
+                System.out.println(rs.getString("tripID") +  "\t" + 
+                                   rs.getString("date") +  "\t" + 
+                                   rs.getString("driver") +  "\t" + 
+                                   rs.getString("state") + "\t" +
+                                   rs.getDouble("price"));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void selectVehicles(){
+        String sql = "SELECT vehID, model, type, multiplier FROM createTableVehicles";
+
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()) {
+                System.out.println(rs.getString("vehID") +  "\t" + 
+                                   rs.getString("model") + "\t" +
+                                   rs.getString("type") + "\t" +
+                                   rs.getInt("multiplier"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
 }
