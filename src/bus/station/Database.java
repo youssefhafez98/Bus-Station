@@ -105,7 +105,7 @@ public class Database {
             while (rs.next()) {
                 System.out.println(rs.getString("empID") +  "\t" + 
                                    rs.getString("name") + "\t" +
-                                   rs.getDouble("capacity"));
+                                   rs.getDouble("salary"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
