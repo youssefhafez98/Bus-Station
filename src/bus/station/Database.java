@@ -176,7 +176,6 @@ public class Database {
     public int searchEmployees(String username, String password, int type)
     {
         String sql = "SELECT username, password FROM employees";
-        
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){

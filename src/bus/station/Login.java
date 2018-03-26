@@ -28,7 +28,7 @@ public class Login extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource("logo.jpg")).getImage());
         this.getContentPane().setBackground(new Color(192,0,0));
         jLabel1.requestFocus();
-        jRadioButton1.isSelected();
+        jRadioButton1.setSelected(true);
     }
 
     /**
@@ -114,7 +114,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(54, 240, 300, 40);
+        jPasswordField1.setBounds(54, 240, 250, 40);
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +211,8 @@ public class Login extends javax.swing.JFrame {
         int test;
         Database d = new Database();
         ManagerUI mui = new ManagerUI(); 
-        DriverUI dui = new DriverUI(); 
+        DriverUI dui = new DriverUI();
+        CustomerUI cui = new CustomerUI();
         
         String username;
         String password;
@@ -226,17 +227,29 @@ public class Login extends javax.swing.JFrame {
         else if(jRadioButton3.isSelected())
             type=2;
         
-        test=d.searchEmployees(username, password, type);
-        if(test==1)
+        if(type==1 || type ==2)
         {
+            test=d.searchEmployees(username, password, type);
+            if(test==1)
+            {
             this.setVisible(false);
             mui.run();
-        }
-        else if(test==2)
-        {
+            }
+            else if(test==2)
+            {
             this.setVisible(false);
             dui.run();
+            }
+        }else if(type==0)
+        {
+            test=d.searchCredentialsCustomers(username, password);
+            if(test==1)
+            {
+                this.setVisible(false);
+                cui.run();
+            }
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
@@ -262,7 +275,7 @@ public class Login extends javax.swing.JFrame {
 
 
     public void run() {
-                new Login().setVisible(true);
+        new Login().setVisible(true);
     }
 
     

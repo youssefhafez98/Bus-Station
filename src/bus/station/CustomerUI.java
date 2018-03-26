@@ -42,6 +42,7 @@ public class CustomerUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("REACH IT Bus Station");
+        setLocation(new java.awt.Point(500, 250));
         setPreferredSize(new java.awt.Dimension(500, 400));
         getContentPane().setLayout(null);
 
