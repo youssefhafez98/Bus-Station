@@ -13,7 +13,8 @@ public class Customer {
    private String name;
    private String username;
    private String password;
-   private String[] trips = new String[100];
+   private int trips;
+   private double balance;
    
    public static double calculateprice(int multiplier, int tickettype)
    {

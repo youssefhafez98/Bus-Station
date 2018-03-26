@@ -11,6 +11,7 @@ package bus.station;
  */
 public abstract class Employee {
     protected String name;
+    protected String empID;
     protected double salary;
     
     public double calculateSalary(int multiplier, int daysworked)

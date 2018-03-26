@@ -10,7 +10,8 @@ package bus.station;
  * @author user
  */
 public abstract class Vehicle {
-    String type;
-    String model;
-    int multiplier;
+    protected String type;
+    protected String model;
+    protected String VehID;
+    protected int multiplier;
 }
