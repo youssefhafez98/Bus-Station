@@ -99,6 +99,7 @@ public class Database {
         String sql = "SELECT empID, name, salary FROM employees";
         
         try (Connection conn = this.connect();
+
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
            
@@ -150,5 +151,26 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
+     public int searchCredentialsCustomers(String username1,String password1){
+       String sql = "SELECT username, password FROM customers";
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            
+            while (rs.next()) {
+                if(rs.getString("username").equals(username1) && rs.getString("password").equals(password1)){
+                    return 1;
+                }
+                else{
+                    continue;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+        return 0;
+       }
     
 }
