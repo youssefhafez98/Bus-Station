@@ -112,7 +112,7 @@ public class Database {
         }
     }
     public void selecttrips(){
-        String sql = "SELECT tripID, date, driver, state, price FROM createTableTrips";
+        String sql = "SELECT tripID, date, driver, state, price FROM trips";
 
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
@@ -133,7 +133,7 @@ public class Database {
     }
     
     public void selectVehicles(){
-        String sql = "SELECT vehID, model, type, multiplier FROM createTableVehicles";
+        String sql = "SELECT vehID, model, type, multiplier FROM vehicles";
 
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
